@@ -8,7 +8,6 @@ describe("Test API ", () => {
         request(app)
             .get('/api')
             .end( (err,res) => {
-                console.log(res.body.result )
                 assert(res.body.result === 'Hello'  )
                 done()
             } )
