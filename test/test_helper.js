@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 before(done => {
   mongoose.connect("mongodb://localhost/uberclone_test");
-  console.log('Im here')
   mongoose.connection.once("open", () => done()).on("error", err => {
     console.warn(err);
   });
@@ -11,7 +10,9 @@ before(done => {
 beforeEach(done => {
   const { drivers } = mongoose.connection.collections;
 
-  drivers.drop()
+  drivers
+    .drop()
+    .then(() => drivers.ensureIndex({ 'geometry.coordinates': '2dsphere' }))
     .then(() => done())
     .catch(() => done());
 });

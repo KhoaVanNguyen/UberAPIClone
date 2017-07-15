@@ -12,6 +12,12 @@ if ( process.env.NODE_ENV !== "test" ){
 
 
 app.use(bodyParser.json())
+
+// app.use( (err,req,res,next) => {
+//   res.status(400).send({ error: err })
+//   next()
+// })
+
 route(app)
 
 module.exports = app        
